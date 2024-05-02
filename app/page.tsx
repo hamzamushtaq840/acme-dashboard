@@ -1,10 +1,23 @@
 import AcmeLogo from '@/app/ui/acme-logo';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import clsx from 'clsx';
+import Image from 'next/image';
+
+type Status = 'pending' | 'paid';
 
 export default function Page() {
+  const status: Status = 'paid';
+
   return (
-    <main className="flex min-h-screen flex-col p-6">
+    <main
+      className={clsx(
+        {
+          'flex min-h-screen flex-col p-4': (status as Status) === 'pending',
+          'flex min-h-screen flex-col p-6': (status as Status) === 'paid',
+        },
+      )}
+    >
       <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
         {/* <AcmeLogo /> */}
       </div>
@@ -26,6 +39,20 @@ export default function Page() {
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
           {/* Add Hero Images Here */}
+          <Image
+            src="/hero-desktop.png"
+            width={900}
+            height={600}
+            className="hidden md:block"
+            alt="Screenshots of the dashboard project showing desktop version"
+          />
+          <Image
+            src="/hero-mobile.png"
+            width={560}
+            height={620}
+            className="block md:hidden"
+            alt="Screenshots of the dashboard project showing desktop version"
+          />
         </div>
       </div>
     </main>
